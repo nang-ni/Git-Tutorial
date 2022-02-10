@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <title>touchposition</title>
+    <script src="../public/jquery-1.12.4.min.js"></script>
+</head>
+<body>
+    
+    <div class="wrap">박스</div>
+</body>
+
+
+    <script>
+        var startY, endY; //변수값 지정(처음 잡은 값, 놓은 값)
+        $('.wrap').on('mousedown touchstart', function (e) { //마우스다운 터치스타트 이벤트
+            e.preventDefault();
+            startY = e.pageY || e.originalEvent.touches[0].pageY; //좌표값 담기
+            $('body').append(startY + '<br>') //밑에 좌표값 표시
+        });
+
+        $('.wrap').on('mouseup touchend', function (e) { //마우스업, 터치엔드 이벤트
+            endY = e.pageY || e.originalEvent.changedTouches[0].pageY; //좌표값 담기
+            $('body').append(endY + '<br>'); //밑에 좌표값 표시
+
+            if (startY < endY) { //아래로 드래그
+                $('body').append('아래로 드래그' + '<br>');
+                $('.wrap').css('background', '#999');
+            } else { //위로 드래그
+                $('body').append('위로 드래그' + '<br>');
+                $('.wrap').css('background', '#666');
+            }
+        });
+
+        var startX, endX
+        $('.wrap').on('mousedowon touchstart', function (e) {
+            e.preventDefault();
+            startX = e.pageX || e.originalEvent.touches[0].pageX;
+            $('body').append('startX' + '<br>');
+        });
+        $('.wrap').on('mouseup touchend', function (e) {
+            endX = e.pageX || e.originalEvent.changesTouches[0].pageX;
+            $('body').append(endX + '<br>');
+            if (satrX < endX) {
+                $('body').append('좌우로 드래그' + '<br>');
+                $('.wrap').css('background', '#333');
+            } else {
+                $('.body').append('우좌로 드래그' + '<br>');
+                $('.wrap').css('background', '#666');
+            }
+        })
+    </script>
+
+
+</html>
